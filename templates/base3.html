@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+{%if list == 'ol'%}
+    <ol>
+    {% for user in prof%}
+    <li>{{ user }}
+    </li>
+    {% endfor %}
+</ol>
+{%elif list == 'ul'%}
+<ul>
+    {% for user in prof%}
+    <li>{{ user }}
+    </li>
+    {% endfor %}
+</ul>
+{%else%}
+    <h3>Ошибка! Неверный параметр</h3>
+{% endif %}
+{% endblock%}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Журнал работ</h1><a href="addjob" class="btn btn-secondary" style="background: #7b6385;">Добавить работу</a>
+{% for item in news%}
+    <h2>Работа {{loop.index}}</h2>
+
+    <table>
+        <tr>
+            <th style="background: #7b6385; border: 3px solid #d4c9c1">Имя работы</th>
+            <th style="background: #7b6385; border: 3px solid #d4c9c1">Тимлиадер</th>
+            <th style="background: #7b6385; border: 3px solid #d4c9c1">Имена коллабораторов</th>
+            <th style="background: #7b6385; border: 3px solid #d4c9c1">Закончена/нет</th>
+        </tr>
+        <tr>
+            <td style="background: #cc9da5; border: 3px solid #d4c9c1">{{item.job}}</td>
+            <td style="background: #cc9da5; border: 3px solid #d4c9c1">{{item.team_leader}}</td>
+            <td style="background: #cc9da5; border: 3px solid #d4c9c1">{{item.collaborators}}</td>
+            <td style="background: #cc9da5; border: 3px solid #d4c9c1">{{item.is_finished}}</td>
+        </tr>
+    </table>
+        {% if current_user.is_authenticated and current_user == item.user or current_user.id == 1%}
+    <div style="margin-top: 20px">
+        <a href="/jobs/{{ item.id }}" class="btn btn-warning">
+            Изменить
+        </a>
+        <a href="/jobs_delete/{{ item.id }}" class="btn btn-danger">
+            Удалить
+        </a>
+    </div>
+{% endif %}
+{% endfor %}
+{% endblock %}
